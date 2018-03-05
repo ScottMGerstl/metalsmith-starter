@@ -4,6 +4,8 @@
   "description": "",
   "main": "build.js",
   "scripts": {
+    "build": "node build.js dev",
+    "build:prod": "node build.js prod",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,6 +15,8 @@
     "handlebars": "^4.0.11",
     "jstransformer-handlebars": "^1.1.0",
     "metalsmith": "^2.3.0",
+    "metalsmith-autoprefixer": "^1.1.2",
+    "metalsmith-browser-sync": "^1.1.1",
     "metalsmith-collections": "^0.9.0",
     "metalsmith-debug": "^1.2.0",
     "metalsmith-discover-partials": "^0.1.0",
