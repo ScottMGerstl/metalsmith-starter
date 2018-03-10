@@ -8,6 +8,7 @@ const
     sass = require('metalsmith-sass'),
     handlebars = require('handlebars'),
     autoprefixer = require('metalsmith-autoprefixer'),
+    assets = require('metalsmith-assets'),
     browsersync = require('metalsmith-browser-sync'),
     circularJSON = require('circular-json'),
     appConfig = require('./app-config.json');
@@ -23,6 +24,10 @@ const pipeline =
         .metadata(appConfig)
         .source('src/site')
         .destination('dist')
+        .use(assets({
+            source: 'src/site/assets',
+            destination: 'assets'
+        }))
         .use(collections({
             pages: {
                 pattern: '*.md'
