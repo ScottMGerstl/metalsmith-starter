@@ -9,7 +9,8 @@ const
     handlebars = require('handlebars'),
     autoprefixer = require('metalsmith-autoprefixer'),
     browsersync = require('metalsmith-browser-sync'),
-    circularJSON = require('circular-json');
+    circularJSON = require('circular-json'),
+    appConfig = require('./app-config.json');
 
 const environment = process.argv[2] || 'dev';
 
@@ -19,12 +20,7 @@ handlebars.registerHelper('json', function(context) {
 
 const pipeline =
     metalsmith(__dirname)
-        .metadata({
-            siteName: 'Metalsmith Starter Project',
-            author: 'Josh Evenson',
-            generator: 'Metalsmith',
-            generatorUrl: 'http://www.metalsmith.io/'
-        })
+        .metadata(appConfig)
         .source('src/site')
         .destination('dist')
         .use(collections({
@@ -61,7 +57,15 @@ const pipeline =
                     "src/site/**/*.scss",
                     "src/layouts/**/*.hbs"
                 ]
-            }));
+            }))
+            // https://github.com/segmentio/metalsmith-collections/issues/27#issuecomment-266647074
+            .use((files, metalsmith, done) => {
+                setImmediate(done);
+                metalsmith.metadata(Object.assign({
+                    site: {},
+                    package: require( './package.json')
+                }, appConfig));
+            });
     }
 
     pipeline
