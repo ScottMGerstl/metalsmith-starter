@@ -19,14 +19,14 @@ handlebars.registerHelper('json', function(context) {
 
 const pipeline =
     metalsmith(__dirname)
-        .source('src')
+        .source('src/site')
         .destination('dist')
         .use(collections({
             pages: {
-                pattern: 'content/pages/*.md'
+                pattern: '*.md'
             },
-            articles: {
-                pattern: 'content/articles/*.md',
+            posts: {
+                pattern: 'blog/*.md',
                 sortBy: 'date'
             }
         }))
@@ -35,21 +35,23 @@ const pipeline =
             pattern: ':collections/:title'
         }))
         .use(discoverPartials({
-            directory: 'layouts/partials',
+            directory: 'src/layouts/partials',
             pattern: /\.hbs$/
         }))
         .use(sass())
         .use(autoprefixer())
-        .use(layouts());
+        .use(layouts({
+            directory: 'src/layouts'
+        }));
 
     if (environment === 'dev') {
         pipeline
             .use(browsersync({
                 server: "dist",
                 files: [
-                    "src/**/*.md",
-                    "src/**/*.scss",
-                    "layouts/**/*.hbs"
+                    "src/site/**/*.md",
+                    "src/site/**/*.scss",
+                    "src/layouts/**/*.hbs"
                 ]
             }));
     }
