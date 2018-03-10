@@ -19,6 +19,12 @@ handlebars.registerHelper('json', function(context) {
 
 const pipeline =
     metalsmith(__dirname)
+        .metadata({
+            siteName: 'Metalsmith Starter Project',
+            author: 'Josh Evenson',
+            generator: 'Metalsmith',
+            generatorUrl: 'http://www.metalsmith.io/'
+        })
         .source('src/site')
         .destination('dist')
         .use(collections({
@@ -38,7 +44,9 @@ const pipeline =
             directory: 'src/layouts/partials',
             pattern: /\.hbs$/
         }))
-        .use(sass())
+        .use(sass({
+            includePaths: ['src/site/styles']
+        }))
         .use(autoprefixer())
         .use(layouts({
             directory: 'src/layouts'
