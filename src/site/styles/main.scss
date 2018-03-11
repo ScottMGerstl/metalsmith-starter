@@ -53,6 +53,11 @@ header {
 div.main-wrapper {
   flex-grow: 1;
   padding: 1vh 5vw;
+
+  @media (min-width: 1000px) {
+    width: 70vw;
+    margin: 0 auto;
+  }
 }
 
 footer {
