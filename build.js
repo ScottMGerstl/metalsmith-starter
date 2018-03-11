@@ -13,10 +13,6 @@ const
     circularJSON = require('circular-json'),
     appConfig = require('./app-config.json');
 
-const cms = require('netlify-cms');
-
-cms.registerPreviewTemplate('my-template', MyTemplate);
-
 const environment = process.argv[2] || 'dev';
 
 handlebars.registerHelper('json', function(context) {
