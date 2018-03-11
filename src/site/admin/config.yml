@@ -18,3 +18,16 @@ collections:
       - {label: "Title", name: "title", widget: "string"}
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "settings"
+    label: "Settings"
+    files:
+      - name: "general"
+        label: "Site Settings"
+        file: "app-config.json"
+        description: "General Site Settings"
+        fields:
+          - {label: "Site Name", name: "siteName", widget: "string"}
+          - {label: "Author", name: "author", widget: "string"}
+          - {label: "Generator", name: "generator", widget: "string"}
+          - {label: "Generator URL", name: "generatorUrl", widget: "string"}
